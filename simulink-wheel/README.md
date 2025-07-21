@@ -16,12 +16,15 @@ Ensure model setup for Data Import/Export is:
   - Single simulation output save as out
 Ensure you save changes.
 
-### 02 - Simulink wrapper on Matlab
-- Open from matlab the simulink_wrapper.m matlab file in the same folder as your simulink model.
-- On the first line of the function, change the hardcoded mdl variable to the name of your simulink model.
+### 02 - Copy Matlab aux files
+Copy the matlab files in this template at the folder matlab-aux-files into your simulink model's location.
+
+### 03 - Simulink wrapper 
+- From Matlab, open the simulink_wrapper.m and, on the first line of the function, change the hardcoded mdl variable to the name of your simulink model.
 - Create an inputMatrix to test the function, such as [0, x1, x2, ..., xn] where x1 is the input data value for the inport block 1, etc. For example inputMatrix = [0, 1, 1, pi/2].
 - Test the wrapper as simulink_wrapper(inputMatrix). The first time is run the model should get compiled. You can test other input values and ensure the model is functioning as expected. Observe output order too
-- 
+
+### 04 - Matlab 
 
 
 
