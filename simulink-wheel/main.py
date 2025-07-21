@@ -16,7 +16,7 @@ def matlab_processing(row: dict):
 
     # Call function here
     input_matrix = np.array([[0, x, y, theta]])
-    output_matrix = quixmatlab_client.simulink_wrapper_v3(input_matrix)
+    output_matrix = quixmatlab_client.simulink_wrapper(input_matrix)
     print(output_matrix)
 
     # Incorporating result to row
