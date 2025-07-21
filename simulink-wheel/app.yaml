@@ -1,4 +1,4 @@
-name: Compiled Matlab Simulink 2024b Wheel GENERAL
+name: Simulink Wheel
 language: python
 variables:
   - name: input
