@@ -16,16 +16,27 @@ Ensure model setup for Data Import/Export is:
   - Single simulation output save as out
 Ensure you save changes.
 
-### 02 - Copy Matlab aux files
-Copy the matlab files in this template at the folder matlab-aux-files into your simulink model's location.
+### 02 - Copy aux files
+Copy all the files in the aux-files folder into your simulink model's location.
+Open matlab from that same folder location.
 
 ### 03 - Simulink wrapper 
 - From Matlab, open the simulink_wrapper.m and, on the first line of the function, change the hardcoded mdl variable to the name of your simulink model.
 - Create an inputMatrix to test the function, such as [0, x1, x2, ..., xn] where x1 is the input data value for the inport block 1, etc. For example inputMatrix = [0, 1, 1, pi/2].
 - Test the wrapper as simulink_wrapper(inputMatrix). The first time is run the model should get compiled. You can test other input values and ensure the model is functioning as expected. Observe output order too
 
-### 04 - Matlab 
+### 04 - Quix Compiler
+Now that the simulink model is wrapped in a matlab function, we are going to compile it.
+For that, run the quix compiler function pointing to the wrapper and selecting your destination folder, like: quix_compiler('simulink_wrapper', 'py')
+After it finishes compiling, we are done with Matlab.
 
+### 05 - Build the wheel
+(if you've been using Matlab online, download the zip file and unzip it locally)
+Now, from the console, run the build_wheel.sh script (./build_wheel.sh).
+Check the new .whl file created, this is what we'll deploy into quix.
+
+### 06 - Update the .whl in the quix app
+Substitute the .whl file in the template by this new one. If the name is different, update the requirements.txt too.
 
 
 ## How to run
