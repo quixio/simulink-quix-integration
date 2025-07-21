@@ -40,6 +40,23 @@ deployments:
       - name: ms_to_sleep
         inputType: FreeText
         value: 500
+  - name: Simulink Wheel
+    application: simulink-wheel
+    version: latest
+    deploymentType: Service
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: Name of the input topic to listen to.
+        value: 2d-vector
+      - name: output
+        inputType: OutputTopic
+        description: Name of the output topic to write to.
+        value: simulink-output
 
 # This section describes the Topics of the data pipeline
 topics:
