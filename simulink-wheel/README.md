@@ -4,39 +4,43 @@
 
 ## How to build the wheel
 
-### 01 - Modify your simulink model
-Ensure any you create one inport block per input you are going to pass.
-Port number is important, order will be followed.
-Create outport blocks for the data you want to output.
-Ensure model setup for Data Import/Export is:
-- Load from workspace (all unticked)
-- Save to workspace or file:
-  - Output (ticked), save as yout
-  - Data stores (ticked) save as dsmout
-  - Single simulation output save as out
-Ensure you save changes.
+### 01 - Modify Your Simulink Model
+- Create one **Inport** block per input signal. The port numbers define the input order.
+- Add **Outport** blocks for the signals you want to output.
+- Configure **Data Import/Export** settings:
+  - **Load from workspace**: all options **unchecked**
+  - **Save to workspace or file**:
+    - ✅ Output → saved as `yout`
+    - ✅ Data stores → saved as `dsmout`
+    - ✅ Single simulation output → saved as `out`
+- Save the model after applying these settings.
 
-### 02 - Copy aux files
-Copy all the files in the aux-files folder into your simulink model's location.
-Open matlab from that same folder location.
+### 02 - Copy Auxiliary Files
+- Copy all files from the `aux-files` folder into the same directory as your Simulink model.
+- Open MATLAB from that folder.
 
-### 03 - Simulink wrapper 
-- From Matlab, open the simulink_wrapper.m and, on the first line of the function, change the hardcoded mdl variable to the name of your simulink model.
-- Create an inputMatrix to test the function, such as [0, x1, x2, ..., xn] where x1 is the input data value for the inport block 1, etc. For example inputMatrix = [0, 1, 1, pi/2].
-- Test the wrapper as simulink_wrapper(inputMatrix). The first time is run the model should get compiled. You can test other input values and ensure the model is functioning as expected. Observe output order too
+### 03 - Wrap the Simulink Model
+- Open `simulink_wrapper.m` and set the `mdl` variable (first line) to your Simulink model's name.
+- Create an `inputMatrix`, e.g. `[0, x1, x2, ..., xn]`, where `x1` is the value for Inport 1, and so on.  
+  Example: `inputMatrix = [0, 1, 1, pi/2]`
+- Run `simulink_wrapper(inputMatrix)` to compile and test the model. Make sure the output order is as expected.
 
-### 04 - Quix Compiler
-Now that the simulink model is wrapped in a matlab function, we are going to compile it.
-For that, run the quix compiler function pointing to the wrapper and selecting your destination folder, like: quix_compiler('simulink_wrapper', 'py')
-After it finishes compiling, we are done with Matlab.
+### 04 - Compile for Quix
+Now that the Simulink model is wrapped inside a MATLAB function, you can compile it using the Quix compiler.
+Run the following command from MATLAB, replacing the arguments if needed:
+quix_compiler('simulink_wrapper', 'py')
+This will generate a folder (py) containing the Python-compatible code.
+Once the compilation is complete, you can close MATLAB.
 
 ### 05 - Build the wheel
-(if you've been using Matlab online, download the zip file and unzip it locally)
-Now, from the console, run the build_wheel.sh script (./build_wheel.sh).
-Check the new .whl file created, this is what we'll deploy into quix.
+If you used MATLAB Online, download and unzip the compiled folder (py) to your local machine.
+Then, from your terminal, navigate to the folder and run:
+./build_wheel.sh
+This script will create a .whl file. This file is the package you’ll deploy to Quix.
 
 ### 06 - Update the .whl in the quix app
-Substitute the .whl file in the template by this new one. If the name is different, update the requirements.txt too.
+Replace the existing .whl file in your Quix app with the new one you just built.
+⚠️ If the new filename differs from the previous one, make sure to update the requirements.txt file accordingly.
 
 
 ## How to run
