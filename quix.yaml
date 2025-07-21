@@ -45,3 +45,4 @@ deployments:
 topics:
   - name: 2d-vector
   - name: throttle_angle
+  - name: simulink-output
