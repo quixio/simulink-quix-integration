@@ -4,12 +4,25 @@
 
 ## How to build the wheel
 
-### Modify your simulink model
-
+### 01 - Modify your simulink model
 Ensure any you create one inport block per input you are going to pass.
 Port number is important, order will be followed.
 Create outport blocks for the data you want to output.
-Ensure model setup is
+Ensure model setup for Data Import/Export is:
+- Load from workspace (all unticked)
+- Save to workspace or file:
+  - Output (ticked), save as yout
+  - Data stores (ticked) save as dsmout
+  - Single simulation output save as out
+Ensure you save changes.
+
+### 02 - Simulink wrapper on Matlab
+- Open from matlab the simulink_wrapper.m matlab file in the same folder as your simulink model.
+- On the first line of the function, change the hardcoded mdl variable to the name of your simulink model.
+- Create an inputMatrix to test the function, such as [0, x1, x2, ..., xn] where x1 is the input data value for the inport block 1, etc. For example inputMatrix = [0, 1, 1, pi/2].
+- Test the wrapper as simulink_wrapper(inputMatrix). The first time is run the model should get compiled. You can test other input values and ensure the model is functioning as expected. Observe output order too
+- 
+
 
 
 ## How to run
