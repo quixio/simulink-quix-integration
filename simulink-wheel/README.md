@@ -1,6 +1,6 @@
-# Starter transformation
+# Simulink Wheel
 
-[This code sample](...) demonstrates how to generate a wheel out of a simulink model and then run it from quix consuming and producing input and output data to kafka topics.
+This code sample demonstrates how to run Simulink models in Quix as Python-compatible .whl packages.
 
 ## How to build the wheel
 
@@ -15,39 +15,27 @@
     - ✅ Single simulation output → saved as `out`
 - Save the model after applying these settings.
 
-### 02 - Copy Auxiliary Files
-- Copy all files from the `aux-files` folder into the same directory as your Simulink model.
-- Open MATLAB from that directory.
-
-### 03 - Wrap the Simulink Model
+### 02 - Wrap the Simulink Model in a MATLAB function
+- Save your Simulink model file in the `compilation-files` folder (like the rot.m example).
+- Open MATLAB from the `compilation-files` folder.
 - Open `simulink_wrapper.m` and set the `mdl` variable (first line) to your Simulink model's name.
-- At the matlab console, create an `inputMatrix`, e.g. `[0, x1, x2, ..., xn]`, where `x1` is the value for Inport 1, and so on.  
+- Create an `inputMatrix`, e.g. `[0, x1, x2, ..., xn]`, where `x1` is the value for Inport 1, and so on, as explained in step 01.  
   Example: `inputMatrix = [0, 1, 1, pi/2]`
-- Run `simulink_wrapper(inputMatrix)` to compile the model for the first time. Make sure the output order and format are as expected.
+- Run `simulink_wrapper(inputMatrix)` to compile and test the model. Make sure the output order is as expected.
 
-### 04 - Compile for Quix
+### 03 - Compile for Quix
 Now that the Simulink model is wrapped inside a MATLAB function, you can compile it using the Quix compiler.
-Run the `quix_compiler.m` replacing the arguments if needed:
-quix_compiler('simulink_wrapper', 'py')
-This will generate a folder (py) containing the Python-compatible code.
-If you used MATLAB Online, download and unzip the compiled folder (py.zip) to your local machine.
-Once the compilation is complete, you can close MATLAB.
+- Run the `quix_compiler.m` script, replacing the arguments:  
+  ```matlab
+  quix_compiler('simulink_wrapper', 'py')
+This will generate a folder named py containing the Python-compatible code, as well as the .whl package that we’ll deploy to Quix.
 
-### 05 - Build the wheel
-From your terminal, navigate to the (py) folder and run:
-./build_wheel.sh
-This script will create a .whl file. This file is the package you’ll deploy to Quix.
-
-### 06 - Update the .whl in the quix app
+### 04 - Update the .whl in the quix app
 Replace the existing .whl file in your Quix app with the new one you just built.
 ⚠️ If the new filename differs from the previous one, make sure to update the requirements.txt file accordingly.
 
-
-## How to run
-
-Create a [Quix](https://portal.platform.quix.io/signup?xlink=github) account or log-in and visit the Samples to use this project.
-
-Clicking `Edit code` on the Sample, forks the project to your own Git repo so you can customize it before deploying.
+### 05 - Update main.py
+Edit the `matlab_processing` function in `main.py` to accommodate your specific function's input and output variables.
 
 
 ## Environment variables
