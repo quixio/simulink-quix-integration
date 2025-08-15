@@ -1,4 +1,4 @@
-name: Simulink Wheel
+name: Simulink Wheel Engine
 language: python
 variables:
   - name: input
