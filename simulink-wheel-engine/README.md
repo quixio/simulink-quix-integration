@@ -16,7 +16,7 @@ This code sample demonstrates how to run Simulink models in Quix as Python-compa
 - Save the model after applying these settings.
 
 ### 02 - Wrap the Simulink Model in a MATLAB function
-- Save your Simulink model file in the `compilation-files` folder (like the rot.m example).
+- Save your Simulink model files in the `compilation-files` folder (like the rot.m example).
 - Open MATLAB from the `compilation-files` folder.
 - Open `simulink_wrapper.m` and set the `mdl` variable (first line) to your Simulink model's name.
 - Create an `inputMatrix`, e.g. `[0, x1, x2, ..., xn]`, where `x1` is the value for Inport 1, and so on, as explained in step 01.  

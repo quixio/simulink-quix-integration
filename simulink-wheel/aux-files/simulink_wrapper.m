@@ -1,5 +1,5 @@
 function outputMatrix = simulink_wrapper(inputMatrix)
-    mdl = "simulink_example_inports";
+    mdl = "simulink_model_example";
 
     %---------------------------------------------------------------
     % 1. Extract time and input signals from input matrix
@@ -60,23 +60,28 @@ function outputMatrix = simulink_wrapper(inputMatrix)
     %---------------------------------------------------------------
     % 5. Extract full output signal values into a matrix [n_times x total_output_width]
     %---------------------------------------------------------------
-    n_outputs = yout.numElements;
-    outputMatrix = [];  % Initialize empty matrix
+    if isa(yout, 'Simulink.SimulationData.Dataset')
+        n_outputs = yout.numElements;
+        outputMatrix = [];
+        for i = 1:n_outputs
+            data = yout{i}.Values.Data;
+            outputMatrix = [outputMatrix, data];
+        end
     
-    for i = 1:n_outputs
-        data = yout{i}.Values.Data;  % Can be [n_times x k]
-        
-        % On first loop, determine number of time steps
-        if i == 1
-            n_times = size(data, 1);
+    elseif isnumeric(yout)
+        % yout is already [n_times x n_outputs]
+        outputMatrix = yout;
+    
+    elseif isstruct(yout)
+        % Structure with time format
+        n_outputs = numel(yout.signals);
+        outputMatrix = [];
+        for i = 1:n_outputs
+            data = yout.signals(i).values;
+            outputMatrix = [outputMatrix, data];
         end
-        
-        % Sanity check: all outputs must share same time base
-        if size(data,1) ~= n_times
-            error("Inconsistent time dimension in output %d", i)
-        end
-        
-        outputMatrix = [outputMatrix, data];  % Concatenate along columns
+    else
+        error('Unexpected yout type: %s', class(yout));
     end
     
     persistent outputMatrix_0
