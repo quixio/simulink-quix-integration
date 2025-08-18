@@ -10,19 +10,15 @@ print("Exported MATLAB functions:", dir(quixmatlab_client))
 # Define matlab function call
 def matlab_processing(row: dict):
     # Prepare function inputs
-    x = row["x"]
-    y = row["y"]
-    theta = np.pi/4 # 45 degrees in radians
-
-    # Call function here
-    input_matrix = np.array([[0, x, y, theta]])
+    throttle_angle = row["throttle_angle"]
+    input_matrix = np.array([[0, throttle_angle]])
     # print("Input", input_matrix)
     output_matrix = quixmatlab_client.simulink_wrapper(input_matrix)
     # print("Output", output_matrix)
 
     # Incorporating result to row
-    row["x_new"] = output_matrix[0][0]
-    row["y_new"] = output_matrix[0][1]
+    row["crank_speed_rad/sec"] = output_matrix[0][0]
+    row["engine_speed_rpm"] = output_matrix[0][1]
     
 
 def main():
