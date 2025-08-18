@@ -24,7 +24,7 @@ def matlab_processing(row: dict):
 def main():
     # Setup necessary objects
     app = Application(
-        consumer_group="CompilerSDKMatlab2024b_wheel_general",
+        consumer_group="CompilerSDKMatlab2025a_wheel_general",
         auto_create_topics=True,
         auto_offset_reset="earliest"
     )
