@@ -3,4 +3,4 @@ numpy
 python-dotenv
 setuptools 
 wheel
-./quixmatlab_r2024b-24.2-py3-none-any.whl
+./quixmatlab_r2025a-25.1-py3-none-any.whl
