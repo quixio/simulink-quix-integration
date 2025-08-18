@@ -57,6 +57,23 @@ deployments:
         inputType: OutputTopic
         description: Name of the output topic to write to.
         value: simulink-output
+  - name: Simulink Wheel Engine
+    application: simulink-wheel-engine
+    version: latest
+    deploymentType: Service
+    resources:
+      cpu: 1000
+      memory: 2000
+      replicas: 1
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: Name of the input topic to listen to.
+        value: throttle_angle
+      - name: output
+        inputType: OutputTopic
+        description: Name of the output topic to write to.
+        value: simulink-output-II
 
 # This section describes the Topics of the data pipeline
 topics:
