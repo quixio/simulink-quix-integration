@@ -1,8 +1,8 @@
-FROM containers.mathworks.com/matlab-runtime:r2024b
+FROM containers.mathworks.com/matlab-runtime:r2025a
 
 USER root
 # Add MATLAB Runtime
-ENV LD_LIBRARY_PATH=/opt/matlabruntime/R2024b/runtime/glnxa64/:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=/opt/matlabruntime/R2025a/runtime/glnxa64/:$LD_LIBRARY_PATH
 ENV AGREE_TO_MATLAB_RUNTIME_LICENSE=yes
 
 # Install python3.12, venv, and pip
