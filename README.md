@@ -20,7 +20,7 @@ With this starter transformation you can:
 
 Two examples are provided to guide through the whole process:
 
-1. **[Simple angle rotation](https://github.com/quixio/simulink-quix-integration/tree/Main/simulink-wheel)**
+1. **[Simple angle rotation](https://github.com/quixio/simulink-quix-integration/tree/main/simulink-wheel)**
 
 2. **More complex combustion engine**  
 
