@@ -1,0 +1,14 @@
+{
+  "TemplateId": "simulink-quix-integration",
+  "Name": "Simulink Models Integration with Quix",
+  "SshUrl": "https://github.com/quixio/simulink-quix-integration.git",
+  "Branch": "main",
+  "Description": "This template showcases the integration of Simulink models within a streaming pipeline transformation. Two sample models are provided—angle rotation and combustion engine—highlighting the process of wrapping a Simulink model in a MATLAB function, compiling it, and embedding it into a Quix pipeline.",
+  "Tags": {
+    "languages": ["python", "simulink", "matlab"],
+    "category": ["sample", "demo"]
+  },
+  "ImageFile": "images/pipeline.png",
+  "ReadmeFile": "README.md",
+  "Published": true
+}

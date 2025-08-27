@@ -1,0 +1,16 @@
+name: Simulink Wheel Engine
+language: python
+variables:
+  - name: input
+    inputType: InputTopic
+    multiline: false
+    description: Name of the input topic to listen to.
+    defaultValue: throttle_angle
+  - name: output
+    inputType: OutputTopic
+    multiline: false
+    description: Name of the output topic to write to.
+    defaultValue: simulink-output-II
+dockerfile: dockerfile
+runEntryPoint: main.py
+defaultFile: main.py
