@@ -3,7 +3,6 @@
 Quix enables developers to bring **Simulink models** into real-time streaming pipelines.  
 This project demonstrates how to compile a Simulink model into a Python-compatible wheel (`.whl`) package and run it inside Quix, consuming input data from Kafka topics and publishing outputs back.
 
----
 
 ## Why This Project?
 
